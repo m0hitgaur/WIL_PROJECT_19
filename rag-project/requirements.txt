@@ -1,0 +1,31 @@
+# Core Dependencies for Financial Hybrid Vector-Graph RAG System
+
+# Document Parsing & Table Isolation
+docling
+docling-parse
+docling-core
+pillow
+
+# Local Model Integration (Ollama)
+ollama
+langchain-ollama
+
+# Database (Neo4j Vector & Knowledge Graph)
+neo4j
+
+# Agentic Orchestration & Graph RAG
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-core>=0.3.0
+langgraph>=0.2.0
+
+# Schema & Environment
+pydantic>=2.7.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+
+# UI & Utilities
+streamlit>=1.35.0
+rich>=13.7.0
+tqdm>=4.66.0
+pytest>=8.0.0

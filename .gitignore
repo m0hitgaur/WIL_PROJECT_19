@@ -1,0 +1,11 @@
+# database spec
+
+# Environment variables
+.env
+
+
+# Environment
+ragenv
+
+# Other project
+db/neo4j
