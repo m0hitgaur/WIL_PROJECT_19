@@ -56,7 +56,11 @@ class AgentRouter:
         prompt = CONDENSE_PROMPT.format(history=hist_str, query=user_query)
 
         try:
-            response = self.client.generate(model=self.model, prompt=prompt, options={"temperature": 0.0})
+            response = self.client.generate(
+                model=self.model,
+                prompt=prompt,
+                options={"temperature": 0.0, "num_predict": 64},
+            )
             condensed = response["response"].strip()
             return {"condensed_query": condensed or user_query}
         except Exception as e:
@@ -79,7 +83,7 @@ class AgentRouter:
                 model=self.model,
                 prompt=prompt,
                 format="json",
-                options={"temperature": 0.0},
+                options={"temperature": 0.0, "num_predict": 16},
             )
             data = json.loads(response["response"])
             route = data.get("route", "retrieval")

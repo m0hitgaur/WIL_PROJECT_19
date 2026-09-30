@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body {
+  font-family:
+    "Hack Nerd Font Mono",
+    "Hack",
+    "IBM Plex Mono",
+    "DejaVu Sans Mono",
+    monospace;
+  background: #09090b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

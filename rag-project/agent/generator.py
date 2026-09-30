@@ -38,10 +38,15 @@ class DraftGenerator:
         citation_error = state.get("citation_error")
         hallucination_error = state.get("hallucination_error")
         iteration = state.get("iteration_count", 0) + 1
+        available_chunk_ids = [
+            chunk.chunk_id for chunk in state.get("reranked_chunks", [])
+        ]
 
         prompt_parts = [
             f"Question: {query}\n",
             f"Provided Document Context:\n{context}\n",
+            "Available citation IDs (use these exact IDs only): "
+            f"{', '.join(available_chunk_ids)}\n",
         ]
 
         if citation_error:
@@ -65,7 +70,7 @@ class DraftGenerator:
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": full_prompt},
                 ],
-                options={"temperature": 0.0},
+                options={"temperature": 0.0, "num_predict": 160},
             )
             draft = response["message"]["content"].strip()
             logger.info(f"Generated draft answer (length {len(draft)}): {draft[:120]}...")

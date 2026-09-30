@@ -54,7 +54,7 @@ class HallucinationGrader:
                 model=self.model,
                 prompt=prompt,
                 format="json",
-                options={"temperature": 0.0},
+                options={"temperature": 0.0, "num_predict": 48},
             )
             raw = res["response"].strip()
 

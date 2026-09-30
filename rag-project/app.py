@@ -4,9 +4,9 @@ Interactive UI for querying financial reports with LangGraph agentic routing,
 native Neo4j vector-to-graph traversal, citation verification, and graph inspection.
 
 Run via:
-    streamlit run app.py
+    streamlit runpp.py
 """
-
+from pdf_viewer import resolve_citations, show_sources
 import sys
 from pathlib import Path
 import streamlit as st
@@ -155,6 +155,8 @@ for msg in st.session_state.messages:
             with st.expander("🕸️ Traversed Graph Relationships"):
                 for f in msg["facts"]:
                     st.markdown(f"- {f}")
+        if msg.get("citations"):
+            show_sources(msg["citations"])
 
 # User Input
 if prompt := st.chat_input("Ask a question (e.g. 'What is the 1-year return for VAS?', 'What does Note 4 report?')..."):
@@ -215,13 +217,19 @@ if prompt := st.chat_input("Ask a question (e.g. 'What is the 1-year return for 
                     with st.expander("🕸️ Traversed Graph Relationships"):
                         for fact in traversed_facts:
                             st.markdown(f"- {fact}")
-
+            citations = resolve_citations(final_text, reranked)
+            st.write("DEBUG citations:", citations)
+            st.write("DEBUG final_text:", final_text)
+            st.write("DEBUG chunk_ids:", [c.chunk_id for c in reranked])
+            if citations:
+                show_sources(citations)
             # Store assistant response in history
             assistant_msg = {
                 "role": "assistant",
                 "content": final_text,
                 "chunks": chunk_details,
                 "facts": traversed_facts,
+                "citations": citations,
             }
             st.session_state.messages.append(assistant_msg)
             st.session_state.agent_history.append({"role": "assistant", "content": final_text})

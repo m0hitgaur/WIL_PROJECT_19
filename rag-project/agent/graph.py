@@ -54,7 +54,11 @@ def conversational_node(state: AgentState) -> Dict[str, Any]:
         f"User Message: {user_query}"
     )
     try:
-        res = client.generate(model=settings.OLLAMA_LLM_MODEL, prompt=prompt)
+        res = client.generate(
+            model=settings.OLLAMA_LLM_MODEL,
+            prompt=prompt,
+            options={"num_predict": 96},
+        )
         answer = res["response"].strip()
     except Exception:
         answer = "Hello! I am your Financial Document Analysis assistant. Ask me questions about Australian funds, performance, management fees, or report notes."
