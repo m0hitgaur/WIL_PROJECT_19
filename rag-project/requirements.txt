@@ -143,6 +143,7 @@ tree-sitter-python==0.25.0
 tree-sitter-typescript==0.23.2
 truststore==0.10.4
 typer==0.26.8
+typesafe-sdk==0.7.2
 typing-extensions==4.16.0
 typing-inspection==0.4.4
 urllib3==2.8.0

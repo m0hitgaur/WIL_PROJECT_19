@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141419" />
+      <stop offset="100%" stop-color="#0c0c0f" />
+    </linearGradient>
+    <linearGradient id="vasGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#6d28d9" />
+    </linearGradient>
+    <linearGradient id="benchGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" rx="16" fill="url(#bgGrad)" stroke="#272732" stroke-width="1.5" />
+
+  <!-- Title & Subtitle -->
+  <text x="40" y="48" fill="#f3f3f1" font-family="Inter, sans-serif" font-size="20" font-weight="700">
+    Vanguard Australian Shares Index ETF (ASX: VAS)
+  </text>
+  <text x="40" y="74" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="13">
+    Annualized Total Return Comparison vs S&amp;P/ASX 300 Index (Ending 2024)
+  </text>
+
+  <!-- Legend -->
+  <rect x="520" y="46" width="14" height="14" rx="3" fill="url(#vasGrad)" />
+  <text x="542" y="58" fill="#e4e4e7" font-family="Inter, sans-serif" font-size="12" font-weight="600">VAS ETF</text>
+
+  <rect x="630" y="46" width="14" height="14" rx="3" fill="url(#benchGrad)" />
+  <text x="652" y="58" fill="#e4e4e7" font-family="Inter, sans-serif" font-size="12" font-weight="600">S&amp;P/ASX 300</text>
+
+  <!-- Grid Lines & Y-Axis Labels -->
+  <!-- 20% -->
+  <line x1="60" y1="120" x2="740" y2="120" stroke="#22222a" stroke-dasharray="4 4" />
+  <text x="48" y="124" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="end">20%</text>
+
+  <!-- 15% -->
+  <line x1="60" y1="170" x2="740" y2="170" stroke="#22222a" stroke-dasharray="4 4" />
+  <text x="48" y="174" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="end">15%</text>
+
+  <!-- 10% -->
+  <line x1="60" y1="220" x2="740" y2="220" stroke="#22222a" stroke-dasharray="4 4" />
+  <text x="48" y="224" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="end">10%</text>
+
+  <!-- 5% -->
+  <line x1="60" y1="270" x2="740" y2="270" stroke="#22222a" stroke-dasharray="4 4" />
+  <text x="48" y="274" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="end">5%</text>
+
+  <!-- 0% Baseline -->
+  <line x1="60" y1="320" x2="740" y2="320" stroke="#3f3f4e" stroke-width="1.5" />
+  <text x="48" y="324" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="end">0%</text>
+
+  <!-- -5% -->
+  <line x1="60" y1="370" x2="740" y2="370" stroke="#22222a" stroke-dasharray="4 4" />
+  <text x="48" y="374" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="end">-5%</text>
+
+  <!-- BAR GROUP 1: 1-Year Return (VAS: 12.12%, Bench: 12.10%) -->
+  <g class="bar-group">
+    <!-- VAS -->
+    <rect x="110" y="198.8" width="42" height="121.2" rx="4" fill="url(#vasGrad)" filter="url(#glow)" opacity="0.95" />
+    <text x="131" y="188" fill="#c4b5fd" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle">12.1%</text>
+    <!-- Bench -->
+    <rect x="156" y="199.0" width="42" height="121.0" rx="4" fill="url(#benchGrad)" opacity="0.9" />
+    <text x="177" y="188" fill="#7dd3fc" font-family="Inter, sans-serif" font-size="12" font-weight="600" text-anchor="middle">12.1%</text>
+    <!-- Label -->
+    <text x="154" y="348" fill="#d4d4d8" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">1-Year</text>
+    <text x="154" y="366" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Annualized</text>
+  </g>
+
+  <!-- BAR GROUP 2: 3-Year Return (VAS: 7.82%, Bench: 7.79%) -->
+  <g class="bar-group">
+    <!-- VAS -->
+    <rect x="250" y="241.8" width="42" height="78.2" rx="4" fill="url(#vasGrad)" filter="url(#glow)" opacity="0.95" />
+    <text x="271" y="231" fill="#c4b5fd" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle">7.8%</text>
+    <!-- Bench -->
+    <rect x="296" y="242.1" width="42" height="77.9" rx="4" fill="url(#benchGrad)" opacity="0.9" />
+    <text x="317" y="231" fill="#7dd3fc" font-family="Inter, sans-serif" font-size="12" font-weight="600" text-anchor="middle">7.8%</text>
+    <!-- Label -->
+    <text x="294" y="348" fill="#d4d4d8" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">3-Year</text>
+    <text x="294" y="366" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Annualized</text>
+  </g>
+
+  <!-- BAR GROUP 3: 5-Year Return (VAS: 8.41%, Bench: 8.38%) -->
+  <g class="bar-group">
+    <!-- VAS -->
+    <rect x="390" y="235.9" width="42" height="84.1" rx="4" fill="url(#vasGrad)" filter="url(#glow)" opacity="0.95" />
+    <text x="411" y="225" fill="#c4b5fd" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle">8.4%</text>
+    <!-- Bench -->
+    <rect x="436" y="236.2" width="42" height="83.8" rx="4" fill="url(#benchGrad)" opacity="0.9" />
+    <text x="457" y="225" fill="#7dd3fc" font-family="Inter, sans-serif" font-size="12" font-weight="600" text-anchor="middle">8.4%</text>
+    <!-- Label -->
+    <text x="434" y="348" fill="#d4d4d8" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">5-Year</text>
+    <text x="434" y="366" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Annualized</text>
+  </g>
+
+  <!-- BAR GROUP 4: 10-Year Return (VAS: 8.15%, Bench: 8.12%) -->
+  <g class="bar-group">
+    <!-- VAS -->
+    <rect x="530" y="238.5" width="42" height="81.5" rx="4" fill="url(#vasGrad)" filter="url(#glow)" opacity="0.95" />
+    <text x="551" y="228" fill="#c4b5fd" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle">8.2%</text>
+    <!-- Bench -->
+    <rect x="576" y="238.8" width="42" height="81.2" rx="4" fill="url(#benchGrad)" opacity="0.9" />
+    <text x="597" y="228" fill="#7dd3fc" font-family="Inter, sans-serif" font-size="12" font-weight="600" text-anchor="middle">8.1%</text>
+    <!-- Label -->
+    <text x="574" y="348" fill="#d4d4d8" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">10-Year</text>
+    <text x="574" y="366" fill="#71717a" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Annualized</text>
+  </g>
+
+  <!-- Footnote -->
+  <rect x="40" y="420" width="720" height="38" rx="8" fill="#181820" stroke="#2b2b38" />
+  <text x="54" y="444" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="11">
+    Source: Vanguard Wholesale Australian Equities Funds and ETFs Factsheet. Past performance is not a reliable indicator of future performance.
+  </text>
+</svg>

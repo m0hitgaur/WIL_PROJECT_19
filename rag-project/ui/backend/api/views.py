@@ -162,6 +162,7 @@ def chat(request):
     """
 
     question = request.data.get("question", "").strip()
+    raw_history = request.data.get("history", [])
 
     # Validate the incoming question
     if not question:
@@ -175,11 +176,21 @@ def chat(request):
     try:
 
         # -------------------------------------------------
+        # BUILD MULTI-TURN MESSAGE HISTORY FOR RAG
+        # -------------------------------------------------
+        messages = []
+        if isinstance(raw_history, list):
+            for turn in raw_history:
+                if isinstance(turn, dict) and "role" in turn and "content" in turn:
+                    messages.append({"role": str(turn["role"]), "content": str(turn["content"])})
+        messages.append({"role": "user", "content": question})
+
+        # -------------------------------------------------
         # SAME STATE STRUCTURE USED BY TEAM app.py
         # -------------------------------------------------
 
         initial_state = {
-            "messages": [],
+            "messages": messages,
             "user_query": question,
             "condensed_query": "",
             "route": "",
@@ -207,21 +218,50 @@ def chat(request):
         citations = _resolve_citations(final_answer, reranked_chunks, request)
 
         # -------------------------------------------------
-        # CONVERT RETRIEVED CHUNKS TO JSON
+        # CONVERT RETRIEVED CHUNKS TO JSON WITH FULL PDF URLS
         # -------------------------------------------------
 
         sources = []
 
         for chunk in reranked_chunks:
+            cid = getattr(chunk, "chunk_id", "")
+            pages = getattr(chunk, "page_numbers", [])
+            doc_name = _doc_for_chunk(cid) if cid else None
+            if not doc_name:
+                doc_name = "AU-ETFPDS-Vanguard_Australian_Shares_ETFs-VAS-VHY-VAP-VLC-VSO.pdf"
+
+            min_page = int(min(pages)) if pages else 1
+            try:
+                pdf_path = reverse("pdf", kwargs={"doc_name": doc_name})
+                pdf_url = f"{request.build_absolute_uri(pdf_path)}#page={min_page}"
+            except Exception:
+                pdf_url = f"/api/pdf/{doc_name}/#page={min_page}"
 
             sources.append(
                 {
-                    "chunk_id": getattr(chunk, "chunk_id", ""),
+                    "chunk_id": cid,
                     "vector_score": getattr(chunk, "vector_score", None),
-                    "page_numbers": getattr(chunk, "page_numbers", []),
+                    "page_numbers": pages,
                     "text": getattr(chunk, "text", ""),
+                    "doc_title": doc_name,
+                    "page": min_page,
+                    "quote": getattr(chunk, "text", "")[:300],
+                    "pdf_url": pdf_url,
                 }
             )
+
+        # If answer had no citation brackets, synthesize citations from top retrieved chunks
+        if not citations and sources:
+            for s in sources[:3]:
+                citations.append(
+                    {
+                        "chunk_id": s["chunk_id"],
+                        "doc_title": s["doc_title"],
+                        "page": s["page"],
+                        "quote": s["quote"],
+                        "pdf_url": s["pdf_url"],
+                    }
+                )
 
 
         # -------------------------------------------------

@@ -53,6 +53,7 @@ def query(q: Query):
     messages = [t.model_dump() for t in q.history] + [{"role": "user", "content": q.question}]
     state = financial_rag_app.invoke({
         "messages": messages, "user_query": q.question, "condensed_query": "", "route": "",
+        "is_personal_advice": False, "confidence": 1.0, "alias_map": {},
         "retrieved_candidates": [], "reranked_chunks": [], "context_string": "",
         "draft_answer": "", "citation_error": None, "hallucination_error": None,
         "iteration_count": 0, "final_answer": "",

@@ -32,6 +32,10 @@ class Settings(BaseSettings):
     OLLAMA_VLM_MODEL: str = Field(default="qwen2.5-vl:7b", description="Vision-Language Model for tables")
     OLLAMA_EMBED_MODEL: str = Field(default="bge-m3", description="Embedding model for vector index")
 
+    # TypeSafe AI / Jev System 1 Configuration
+    TYPESAFE_API_KEY: str = Field(default="", description="TypeSafe AI API Key for Jev System 1 model")
+    TYPESAFE_MODEL: str = Field(default="jev-latest", description="Jev model identifier")
+
     # Ingestion & Indexing
     CHUNK_SIZE: int = Field(default=800, description="Target chunk size in characters/tokens")
     CHUNK_OVERLAP: int = Field(default=100, description="Chunk overlap")

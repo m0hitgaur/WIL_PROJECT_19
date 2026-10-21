@@ -22,7 +22,7 @@ def test_guardrails_unit():
     fake_chunk = RetrievedItem(
         chunk_id="AU-Vanguard_ETFs_performance_summary_c10",
         document_name="AU-Vanguard_ETFs_performance_summary",
-        text="Sample text",
+        text="Sample text containing Vanguard Australian Shares Index ETF (VAS) return of 12.1%.",
         vector_score=0.88,
     )
 
